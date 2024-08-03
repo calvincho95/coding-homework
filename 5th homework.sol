@@ -165,7 +165,4 @@ contract Q50 {
     function numbers(uint _a, uint _b, uint _c) public pure returns (uint) {
         return _a*100 +_b*10 +_c;
     }
-
-
-
 }

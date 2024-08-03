@@ -2,194 +2,179 @@
 
 pragma solidity >=0.8.2 < 0.9.0;
 
-contract Q51 {
+contract Q61 {
 
-//1. 숫자들이 들어가는 배열을 선언하고 그 중에서 3번째로 큰 수를 반환하세요.
+//     1. a의 b승을 반환하는 함수를 구현하세요.
+// - 답안
 
-    uint[] numbers;
-
-    function setNumbers(uint _a) public {
-        numbers.(push(_a));
-
-         function getThirdLargest() public view returns (uint) {
-        require (numbers.length >= 3, "nope");
-
-    }
- }
-
-   
-
-
-
-
-
-contract Q52 {
-
-/*1. 자동으로 아이디를 만들어주는 함수를 구현하세요. 이름, 생일, 지갑주소를 기반으로 만든 해시값의 첫 10바이트를 추출하여 아이디로 만드시오.*/
-
-
-    struct ID {
-        string name;
-        uint birthday;
-        address addr;
-    }
-
-    mapping (string => ID) User;
-
-    function addID(string memory _name, uint _birthday, address _addr) public {
-        User.push(ID(_name, _birthday,_addr));
-    }
-
-
-}
-
-
-contract Q53 {
-/*1. 시중에는 A,B,C,D,E 5개의 은행이 있습니다. 각 은행에 고객들은 마음대로 입금하고 인출할 수 있습니다. 각 은행에 예치된 금액 확인, 입금과 인출할 수 있는 기능을 구현하세요.
-    
-    힌트 : 이중 mapping을 꼭 이용하세요.
-    
-
-
-- 답안
-- upgrade
-*/
-
-    enum Bank { A, B, C, D, E}
-
-maaping(Bank  =>maaping(address => uint )) Balance;
-
-    function deposit(Bank _bank, uint _money) public {
-        Bank[_bank][msg.sender] += _money;
-    }
-
-    function withdraw(Bank _bank, uint _money) public {
-        Bank[_bank][msg.sender] -= _money;
-    }
-    }
-
-    function checkBalance(Bank _bank) public view returns (uint) {
-        return Bank[_bank][msg.sender];
-    }
-
-}
-
-
-contract Q54 {
-/*1. 기부받는 플랫폼을 만드세요. 가장 많이 기부하는 사람을 나타내는 변수와 그 변수를 지속적으로 바꿔주는 함수를 만드세요.
-    
-    힌트 : 굳이 mapping을 만들 필요는 없습니다. */
-    
-    address topDonor;
-    uint topDonation;
-
-    uint totalDonation;
-
-    function donation() public {
-        require(msg.value >= 0, "donattion must be greater than $0");
-
-        totalDonation += msg.value;
-
-        if(msg.value >= topDonation) {
-            topDoner = msg.sender;
-            topDonation = msg.value;
+        function (uint _a, uint _b) public (uint) {
+            return _a **_b;
         }
 
-
-    functiong getTopDoner() public view returns (address, uint) {
-        return (topDonor, topDonation)
     }
-
-    function getTotalDonation() public view returns (uint) {
-        return totalDonation;
-    }
-    }
-
 }
 
-contract Q55 {
-/*1. 배포와 함께 owner를 설정하고 owner를 다른 주소로 바꾸는 것은 오직 owner 스스로만 할 수 있게 하십시오.
-- 답안*/
-
-    address ownder;
-
-    construct {
-        owner = msg.sender;
+contract Q62 {
+// 1. 2개의 숫자를 더하는 함수, 곱하는 함수 a의 b승을 반환하는 함수를 구현하는데 3개의 함수 모두 2개의 input값이 10을 넘지 않아야 하는 조건을 최대한 효율적으로 구현하세요.
+// - 답안
+    function add(uint _a, uint _b) public pure return (uint) {
+        require(_a+_b <= 10, "nope");
     }
+    return _a + _b;
 
-    modifier onlyOwnder() {
-        require(msg.sender == ownder, "not the owner of this contract")
-        _;
+    function add(uint _a, uint _b) public pure return (uint) {
+        require(_a*_b <= 10, "nope");
     }
+    return _a * _b;
 
-    function changeOwner(address newOwner) public {
-        require(newOnwer !== address(0), "nope");
-        ownwer = newOnwer;
-
+    function add(uint _a, uint _b) public pure return (uint) {
+        require(_a**_b <= 10, "nope");
     }
-
+    return _a + _b;
 }
 
-contract Q56 {
-/*1. 위 문제의 확장버전입니다. owner와 sub_owner를 설정하고 owner를 바꾸기 위해서는 둘의 동의가 모두 필요하게 구현하세요.
-- 답안*/
+contract Q63 {
+// 1. 2개 숫자의 차를 나타내는 함수를 구현하세요.
+// - 답안
 
-
-    address owner;
-    address subOwner;
-
-
-    constructor {
-        owner = msg.sender;
-        subOwner == _subOwner;
+    funciton sub(uint _a, uint _b) public pure returns (uint) {
+        return _a > _b ? _a - _b : _b - _a;
     }
-
-    modifier onlyOwner {
-        require (owner == msg.sender, "only Onwer can access")
-        _;
-    }
-
-    modifier subOwner {
-        require (subOwner == msg.sender, "only Sub-Owner can access")
-        _;
-    }
-
-    function changeOwner(address _newOwner) public {
-        require (_newOnwer !== 0, "nope"  );
-        owner = _newOwner;
-    }
-
-    function changeSubOwner(address _newSubOwner) public {
-        require (_newSubOnwer !== 0, "nope"  );
-        owner = _newSubOwner;
-    }
-
+    })
 }
 
-contract Q57 {
-/*1. 위 문제의 또다른 버전입니다. owner가 변경할 때는 바로 변경가능하게 sub-owner가 변경하려고 한다면 owner의 동의가 필요하게 구현하세요.
-- 답안 */
+contract Q64 {
+// 1. 지갑 주소를 넣으면 5개의 4bytes로 분할하여 반환해주는 함수를 구현하세요.
+// - 답안
 
+    function fourbytes(address _addr) public pure returns (bytes4) {
+
+    }
 }
 
-contract Q58 {
-/*1. A contract에 a,b,c라는 상태변수가 있습니다. a는 A 외부에서는 변화할 수 없게 하고 싶습니다. b는 상속받은 contract들만 변경시킬 수 있습니다. c는 제한이 없습니다. 각 변수들의 visibility를 설정하세요.
-- 답안 */
-
-}
-
-
-contract Q59 {
-/*1. 현재시간을 받고 2일 후의 시간을 설정하는 함수를 같이 구현하세요.
-- 답안 */
-
-}
-
-contract Q60 {
-/*1. 방이 2개 밖에 없는 펜션을 여러분이 운영합니다. 각 방마다 한번에 3명 이상 투숙객이 있을 수는 없습니다. 특정 날짜에 특정 방에 누가 투숙했는지 알려주는 자료구조와 그 자료구조로부터 값을 얻어오는 함수를 구현하세요.
+contract Q65 {
+1. 숫자 3개를 입력하면 그 제곱을 반환하는 함수를 구현하세요. 그 3개 중에서 가운데 출력값만 반환하는 함수를 구현하세요.
     
-    예약시스템은 운영하지 않아도 됩니다. 과거의 일만 기록한다고 생각하세요.
+//     예) func A : input → 1,2,3 // output → 1,4,9 | func B : output 4 (1,4,9중 가운데 숫자) 
     
-    힌트 : 날짜는 그냥 숫자로 기입하세요. 예) 2023년 5월 27일 → 230527 */
+// - 답안
+
+    function power(uint _a, uint _b, uint _c) public pure returns (uint, uint, uint) {
+        return (_a**2, _b**2, _c**3);
+
+    }
+
+    
+
+    function median(uint a, uint b, uin c) public pure reutnrs(uint) {
+        (, uint res, ) = A(a, b, c);
+        return res;
+    }
+}
+
+contract Q66 {
+// 1. 특정 숫자를 입력했을 때 자릿수를 알려주는 함수를 구현하세요. 
+//추가로 그 숫자를 5진수로 표현했을 때는 몇자리 숫자가 될 지 알려주는 함수도 구현하세요.
+// - 답안
+
+    function doe(uint _n) public pure returns(uint) {
+        uint digit = 0;
+
+        while(_n>=0) {
+            digit++;
+            _n/=10;
+        }
+
+        return digit;
+    }
+
+    function quinary(uint _n) public pure returns(uint) {
+        uint digit =1;
+
+        while(_n>=5) {
+            digit++;
+            _n/=5;
+        }
+
+        return digit;
+    }
+
+contract Q67 {
+1. 자신의 현재 잔고를 반환하는 함수를 보유한 Contract A와 다른 주소로 돈을 보낼 수 있는 Contract B를 구현하세요.
+    
+//     B의 함수를 이용하여 A에게 전송하고 A의 잔고 변화를 확인하세요.
+    
+// - 답안
+
+
+contract A {
+    function getBalance() public pure returns (uint) {
+        return address(this).balance;
+    }
+        receive external payable{}
+}
+
+
+contract B{
+    function sendEther(address payable _a) public payable {
+        require(msg.value > 0, "must be greater than $0");
+        _a.transfer(msg.value);
+    }
+
+}
+
+contract Q68 {
+1. 계승(팩토리얼)을 구하는 함수를 구현하세요. 계승은 그 숫자와 같거나 작은 모든 수들을 곱한 값이다. 
+    
+//     예) 5 → 1*2*3*4*5 = 60, 11 → 1*2*3*4*5*6*7*8*9*10*11 = 39916800
+    
+//     while을 사용해보세요
+    
+// - 답안
+
+    function Factorial(uint _a) public pure returns(uint) {
+        require (_a > 0, "nope")
+
+        uint result = 1;
+        while(i <= n) {
+            result  *= i;
+            i++;
+        }
+
+        return result;
+    }
+}
+
+import "@openzepplin/contracts/utils/Strings.sol""
+
+contract Q69 {
+1. 숫자 1,2,3을 넣으면 1 and 2 or 3 라고 반환해주는 함수를 구현하세요.
+    
+//     힌트 : 7번 문제(시,분,초로 변환하기)
+    function onetwothree(uint _a, uint _b, uint _c) public pure return (string memory) {
+        if (_a == 1 && _b ==2 && _cc=3) {
+            return "1 and 2 or 3";
+        }
+    }
+
+// - 답안
+}
+
+contract Q70 {
+// 1. 번호와 이름 그리고 bytes로 구성된 고객이라는 구조체를 만드세요. bytes는 번호와 이름을 keccak 함수의 input 값으로 넣어 나온 output값입니다.
+// 고객의 정보를 넣고 변화시키는 함수를 구현하세요.
+
+
+    sturct Customer {
+        uint number;
+        string name;
+        bytes32 _b;
+    }
+
+
+
+    function setCustomer(uint _number, string calldata _name) public pure returns(Custoemr memory c){
+        c = Customer(_number, _name, keccak256(abi.encodPacked(_number, _name)));
+    }
 
 }
